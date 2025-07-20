@@ -1,0 +1,22 @@
+{% extends 'fly/base.html' %}
+{% block title %}Vendor Registration{% endblock %}
+
+{% block content %}
+
+<div style="max-width: 400px; margin: 50px auto; padding: 30px; background-color: rgba(255,255,255,0.9); border-radius: 12px; box-shadow: 0 0 15px rgba(0,0,0,0.2);">
+    <h2 style="text-align: center;"> Venor Registration</h2>
+    <form method="POST" enctype="multipart/form-data" style="display: flex; flex-direction: column; gap: 15px;">
+
+    {% csrf_token %}
+
+     <input type="text" name="username" placeholder="Username" required style="padding: 10px; border-radius: 8px; border: 1px solid #ccc;">
+        
+        <input type="email" name="email" placeholder="Email" required style="padding: 10px; border-radius: 8px; border: 1px solid #ccc;">
+        
+        <input type="password" name="password" placeholder="Password" required style="padding: 10px; border-radius: 8px; border: 1px solid #ccc;">
+        
+        <button type="submit" style="padding: 10px; background-color: #007bff; color: white; border: none; border-radius: 8px; cursor: pointer;">
+            Register
+        </button>
+</form>
+{% endblock %}

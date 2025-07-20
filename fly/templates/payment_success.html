@@ -1,0 +1,30 @@
+
+
+
+{% extends 'fly/base.html' %}
+{% block title %}Payment Success{% endblock %}
+
+{% block content %}
+   
+
+    <h2>Payment Successful</h2>
+    <p>Thank you! Your booking has been confirmed for <strong>{{ package.title }}</strong>.</p>
+    <!-- <p>Payment ID: {{ payment_id }}</p> -->
+    <a href="{% url 'user_dashboard' %}">Go to Dashboard</a>
+    <form action="/payment/success/" method="POST">
+    {% csrf_token %}
+    <script
+        src="https://checkout.razorpay.com/v1/checkout.js"
+        data-key="{{ rzp_test_WkheHdq6145t9v }}"
+        data-amount="{{ order_amount }}"
+        data-currency="INR"
+        data-order_id="{{ order_id }}"
+        data-buttontext="Pay with Razorpay"
+        data-name="Tour Booking"
+        data-description="Payment for {{ package.title }}"
+        data-theme.color="#F37254">
+    </script>
+    <input type="hidden" name="package_id" value="{{ package.id }}">
+</form>
+
+{% endblock %}

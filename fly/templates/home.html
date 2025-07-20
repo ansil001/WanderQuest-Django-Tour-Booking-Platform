@@ -1,0 +1,12 @@
+{% extends 'fly/base.html' %}
+{% load static %}
+{% block background_image %}
+background: url("{% static 'images/user_bg.jpg' %}") no-repeat center center fixed;
+{% endblock %}
+{% block content %}
+<h1>Welcome to WanderQuest</h1>
+<a href="{% url 'user_login' %}">User Login</a> |
+<a href="{% url 'user_register' %}">User Register</a> |
+<a href="{% url 'vendor_register' %}">Vendor Register</a>|
+<a href="{% url 'vendor_login' %}">Vendor Login</a> 
+{% endblock %}

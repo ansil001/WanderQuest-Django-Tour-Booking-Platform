@@ -1,0 +1,30 @@
+{% extends 'fly/base.html' %}
+{% load static %}
+{% block title %}Add Package{% endblock %}
+{% block background_image %}
+background: url("{% static 'images/user_bg.jpg' %}") no-repeat center center fixed;
+{% endblock %}
+{% block content %}
+<h2 style="text-align:center; margin-bottom: 20px;">Add New Tour Package</h2>
+<form method="POST" enctype="multipart/form-data" style="max-width: 600px; margin: auto;">{% csrf_token %}
+
+    <input type="text" name="title" placeholder="Title" required style="width: 100%; padding: 10px; margin-bottom: 10px;"><br>
+
+    <textarea name="description" placeholder="Description" required style="width: 100%; padding: 10px; margin-bottom: 10px;"></textarea><br>
+
+    <input type="number" name="price" placeholder="Price (₹)" required style="width: 100%; padding: 10px; margin-bottom: 10px;"><br>
+
+    <input type="date" name="start_date" placeholder="Start Date" required style="width: 100%; padding: 10px; margin-bottom: 10px;"><br>
+
+    <input type="date" name="end_date" placeholder="End Date" required style="width: 100%; padding: 10px; margin-bottom: 10px;"><br>
+
+    <input type="number" name="duration_days" placeholder="Duration (in days)" required style="width: 100%; padding: 10px; margin-bottom: 10px;"><br>
+
+    <label style="font-weight: bold;">Upload Image:</label><br>
+    <input type="file" name="image" accept="image/*" style="margin-bottom: 15px;"><br>
+
+    <button type="submit" style="width: 100%; padding: 10px; background-color: #3498db; color: white; font-weight: bold; border: none; border-radius: 5px;">
+        Submit
+    </button>
+</form>
+{% endblock %}

@@ -1,0 +1,27 @@
+
+{% extends 'fly/base.html' %}
+{% load static %}
+
+{% block title %}Make Payment{% endblock %}
+
+{% block content %}
+<h2 style="text-align: center;">Pay for: {{ package.title }}</h2>
+<p><strong>Price:</strong> ₹{{ package.price }}</p>
+
+<form method="POST" id="razorpay-form">
+    {% csrf_token %}
+    <script src="https://checkout.razorpay.com/v1/checkout.js"
+            data-key="{{ key_id }}"
+            data-amount="{{ payment.amount }}"
+            data-currency="INR"
+            data-order_id="{{ payment.id }}"
+            data-buttontext="Pay Now"
+            data-name="WanderQuest"
+            data-description="Tour Booking"
+            data-prefill.name="{{ request.user.username }}"
+            data-prefill.email="{{ request.user.email }}"
+            data-theme.color="#F37254">
+    </script>
+    <input type="hidden" name="package_id" value="{{ package.id }}">
+</form>
+{% endblock %}

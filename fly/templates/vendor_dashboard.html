@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Your Tour Packages</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #ecf0f1;
+            margin: 0;
+            padding: 20px;
+        }
+        .header {
+            max-width: 800px;
+            margin: 0 auto 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        h2 {
+            color: #2c3e50;
+            margin: 0;
+        }
+        .add-button {
+            background-color: #3498db;
+            color: white;
+            padding: 10px 18px;
+            border: none;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.1);
+            transition: background 0.3s ease;
+        }
+        .add-button:hover {
+            background-color: #2980b9;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+            max-width: 800px;
+            margin: auto;
+        }
+        li {
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+            border-left: 5px solid #3498db;
+            padding: 15px 20px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.05);
+        }
+        li strong {
+            font-size: 18px;
+            color: #2980b9;
+        }
+        li span.label {
+            color: #2c3e50;
+            font-weight: 500;
+        }
+        .edit-link {
+            display: inline-block;
+            margin-top: 8px;
+            color: #3498db;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .edit-link:hover {
+            text-decoration: underline;
+        }
+        .empty-message {
+            text-align: center;
+            color: #999;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h2>Your Tour Packages</h2>
+    <a href="{% url 'add_package' %}" class="add-button">+ Add Package</a>
+</div>
+
+<ul>
+    {% for package in packages %}
+        <li>
+            <strong>{{ package.title }}</strong><br>
+            <span class="label">Price:</span> ₹{{ package.price }}<br>
+            <span class="label">Start:</span> {{ package.start_date }} |
+            <span class="label">End:</span> {{ package.end_date }}<br>
+            <span class="label">Duration:</span> {{ package.duration_days }} days<br>
+            <span class="label">Approved:</span>
+            {% if package.is_approved %}
+                <span style="color: green;">Yes</span>
+            {% else %}
+                <span style="color: red;">No</span>
+            {% endif %}<br>
+            <span class="label">Created by:</span> {{ package.created_by.username }}<br>
+            <a href="{% url 'edit_package' package.id %}" class="edit-link">Edit</a>
+        </li>
+    {% empty %}
+        <li class="empty-message">No packages found.</li>
+    {% endfor %}
+</ul>
+
+</body>
+</html>

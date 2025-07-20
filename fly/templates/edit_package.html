@@ -1,0 +1,33 @@
+{% extends 'fly/base.html' %}
+{% load static %}
+
+{% block title %}Edit Package{% endblock %}
+
+{% block background_image %}
+background: url("{% static 'images/user_bg.jpg' %}") no-repeat center center fixed;
+{% endblock %}
+
+{% block content %}
+<h2 style="text-align:center; margin-bottom: 20px;">Edit Tour Package</h2>
+<form method="POST" enctype="multipart/form-data" style="max-width: 600px; margin: auto;">
+    {% csrf_token %}
+    <input type="text" name="title" value="{{ package.title }}" required placeholder="Title"
+           style="width: 100%; padding: 10px; margin-bottom: 10px;">
+    <textarea name="description" required placeholder="Description"
+              style="width: 100%; padding: 10px; margin-bottom: 10px;">{{ package.description }}</textarea>
+    <input type="number" name="price" value="{{ package.price }}" required placeholder="Price (₹)"
+           style="width: 100%; padding: 10px; margin-bottom: 10px;">
+    <input type="date" name="start_date" value="{{ package.start_date|date:'Y-m-d' }}" required
+           style="width: 100%; padding: 10px; margin-bottom: 10px;">
+    <input type="date" name="end_date" value="{{ package.end_date|date:'Y-m-d' }}" required
+           style="width: 100%; padding: 10px; margin-bottom: 10px;">
+    <input type="number" name="duration_days" value="{{ package.duration_days }}" required
+           placeholder="Duration (in days)" style="width: 100%; padding: 10px; margin-bottom: 10px;">
+    <label style="font-weight: bold;">Replace Image (optional):</label><br>
+    <input type="file" name="image" accept="image/*" style="margin-bottom: 15px;"><br>
+    <button type="submit"
+            style="width: 100%; padding: 10px; background-color: #27ae60; color: white; font-weight: bold; border: none; border-radius: 5px;">
+        Update Package
+    </button>
+</form>
+{% endblock %}

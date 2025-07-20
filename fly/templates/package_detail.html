@@ -1,0 +1,29 @@
+{% extends 'fly/base.html' %}
+{% block content %}
+<h2>{{ package.title }}</h2>
+<p>{{ package.description }}</p>
+<p>Price: ₹{{ package.price }}</p>
+<p>Start Date: {{ package.start_date }}</p>
+<p>End Date: {{ package.end_date }}</p>
+{% if package.image %}
+    <div style="text-align: center; margin: 20px 0;">
+        <img src="{{ package.image.url }}" alt="Package Image" style="width:300px; height:auto; border-radius: 10px;">
+    </div>
+{% else %}
+    <p>No image available.</p>
+{% endif %}
+<form method="POST" action="{% url 'payment_success' %}">
+    {% csrf_token %}
+    <input type="hidden" name="package_id" value="{{ package.id }}">
+    <script src="https://checkout.razorpay.com/v1/checkout.js"
+            data-key="{{ razorpay_key_id }}"
+            data-amount="{{ payment.amount }}"
+            data-currency="INR"
+            data-order_id="{{ payment.id }}"
+            data-buttontext="Pay Now"
+            data-name="WanderQuest"
+            data-description="Payment for {{ package.title }}"
+            data-theme.color="#F37254">
+    </script>
+</form>
+{% endblock %}
